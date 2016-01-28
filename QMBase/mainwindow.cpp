@@ -4,6 +4,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
 #include <QFileDialog>
+#include <QFileInfo>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -41,4 +42,21 @@ void MainWindow::on_actionOpen_triggered()
     scene->addItem(item);
     ui->graphicsView->setScene(scene);
     ui->graphicsView->show();
+}
+
+void MainWindow::on_actionSave_as_triggered()
+{
+    QString filePathName = QFileDialog::getSaveFileName(this,
+        tr("Save Image"), "", tr("Image Files (*.png *.jpg)"));
+    QFileInfo fileInfo(filePathName);
+    QString fileName(fileInfo.fileName());
+    QString fileExtension(fileInfo.suffix());
+    if(fileExtension.compare("png", Qt::CaseInsensitive))
+    {
+        image->save(filePathName, "PNG");
+    }
+    else if(fileExtension.compare("jpg", Qt::CaseInsensitive))
+    {
+        image->save(filePathName, "JPG");
+    }
 }
