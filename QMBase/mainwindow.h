@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QImage>
 #include <QKeyEvent>
+#include "imagehandler.h"
 
 namespace Ui {
 class MainWindow;
@@ -24,6 +25,8 @@ private:
     void keyPressEvent(QKeyEvent *);
     Ui::MainWindow *ui;
     QImage *image;
+
+    ImageHandler imgH;
 };
 
 #endif // MAINWINDOW_H
